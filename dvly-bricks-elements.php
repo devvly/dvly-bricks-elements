@@ -2,8 +2,8 @@
 /**
  * Plugin Name: DVLY Bricks Elements
  * Description: Custom Bricks Builder elements by DVLY for WooCommerce and more.
- * Version: 1.0.0
- * Author: Pablo Accorinti
+ * Version: 1.0.1
+ * Author: DVLY
  */
 
 if (!defined('ABSPATH')) exit;
@@ -48,7 +48,7 @@ add_action('init', function () {
 
 
 /**
- * Auto detect updates
+ * Auto detect version updates
  */
 
  add_filter('site_transient_update_plugins', function ($transient) {
