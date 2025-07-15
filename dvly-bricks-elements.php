@@ -15,7 +15,8 @@ add_action('init', function () {
         'featured-product-categories',
         'featured-products',
         'image-text-block',
-        'call-to-action'
+        'call-to-action',
+        'logo-grid'
     ];
 
     foreach ($element_slugs as $slug) {

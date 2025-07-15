@@ -1,0 +1,27 @@
+name: Build & Upload Plugin Zip
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Create plugin zip with correct folder name
+        run: |
+          mkdir dvly-bricks-elements
+          shopt -s extglob
+          cp -r !(dvly-bricks-elements|.git|.github) dvly-bricks-elements/
+          zip -r dvly-bricks-elements.zip dvly-bricks-elements/
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dvly-bricks-elements.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
