@@ -4,7 +4,12 @@
  * Description: Custom Bricks Builder elements by DVLY for WooCommerce and more.
  * Version: 1.0.0
  * Author: Pablo Accorinti
+ * Author URI: https://github.com/pabloaccorinti
+ * GitHub Plugin URI: https://github.com/pabloaccorinti/dvly-bricks-elements
+ * Primary Branch: main
+ * Release Asset: true
  */
+
 
 if (!defined('ABSPATH')) exit;
 
