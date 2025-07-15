@@ -1,0 +1,41 @@
+.brxe-dvly-call-to-action {
+  background: var(--gray-900);
+  background-position: center center;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brxe-dvly-call-to-action-container {
+  padding: var(--gap-2xl) var(--gap-s);
+  width: 100% !important;
+}
+
+.brxe-dvly-call-to-action-content {
+  width: 100%;
+}
+
+.brxe-dvly-call-to-action-buttons {
+  margin-top: var(--gap-m);
+}
+
+.brxe-dvly-call-to-action-buttons .brxe-button {
+  margin: 0 var(--gap-2xs);
+}
+
+.brxe-dvly-call-to-action-buttons .brxe-button {
+  margin: 0 var(--gap-2xs);
+}
+
+.brxe-dvly-call-to-action-above-title {
+  color: var(--white);
+}
+
+.brxe-dvly-call-to-action-title {
+  color: var(--primary);
+}
+
+.brxe-dvly-call-to-action-description {
+  color: var(--white);
+  font-size: var(--font-body-l);
+}

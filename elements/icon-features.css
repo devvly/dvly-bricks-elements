@@ -1,0 +1,43 @@
+.brxe-dvly-icon-features-list .brxe-dvly-icon-feature .brxe-item-icon i {
+  font-size: 48px;
+  color: var(--primary);
+}
+
+.brxe-dvly-icon-features-header {
+  width: var(--full);
+}
+
+.brxe-dvly-icon-features-container {
+  gap: var(--gap-l);
+  padding: var(--gap-2xl) var(--gap-s);
+}
+
+.brxe-dvly-icon-features-subtitle {
+  font-size: var(--font-h6);
+}
+
+.brxe-dvly-icon-features-list {
+  display: flex;
+  gap: var(--gap-m);
+  width: var(--full);
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .brxe-dvly-icon-features-list {
+    flex-direction: row;
+  }
+}
+
+.brxe-dvly-icon-features-list .brxe-dvly-icon-feature {
+  width: var(--full);
+}
+
+.brxe-dvly-icon-feature-text {
+  margin-bottom: var(--gap-s);
+}
+
+
+.brxe-dvly-icon-features-title {
+    margin: 0;
+}

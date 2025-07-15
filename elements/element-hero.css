@@ -1,0 +1,31 @@
+.brxe-dvly-hero {
+    padding: 120px 24px;
+    justify-content: center;
+    background: url(../assets/demo-image-ammo.png) center/cover no-repeat;
+    height: 90vh;
+}
+
+.brxe-dvly-hero-title, .brxe-dvly-hero-subtitle, .brxe-dvly-hero-above-title {
+    width: var(--full);
+    color: var(--white);
+}
+
+.brxe-dvly-hero-above-title {
+    font-size: var(--font-h6);
+    margin-bottom: var(--gap-xs);
+}
+
+.brxe-dvly-hero-subtitle {
+    font-size: var(--font-body-l);
+}
+
+.brxe-dvly-hero-buttons {
+    display: block;
+    width: 100%;
+    padding-top: var(--gap-m);
+}
+
+.brxe-dvly-hero-buttons a {
+    white-space: nowrap;
+    margin: calc(var(--gap-s) / 2);
+}
