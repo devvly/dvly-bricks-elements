@@ -23,5 +23,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: dvly-bricks-elements.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GH_PAT }}
+
