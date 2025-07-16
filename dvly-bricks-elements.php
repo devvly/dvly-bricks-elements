@@ -71,7 +71,7 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
 
     $release = json_decode(wp_remote_retrieve_body($response));
     file_put_contents(__DIR__ . '/update-log.txt', print_r($release, true));
-
+    
     if (!isset($release->tag_name)) return $transient;
 
     $new_version = ltrim($release->tag_name, 'v');
@@ -83,12 +83,7 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
             'plugin'      => $dvly_config['plugin_file'],
             'new_version' => $new_version,
             'url'         => $release->html_url,
-            'package' => array_values(array_filter($release->assets, function($asset) {
-                if (empty($release->assets) || !isset($release->assets[0]->browser_download_url)) {
-                    file_put_contents(__DIR__ . '/update-error.txt', 'No valid .zip asset found');
-                }
-                return str_ends_with($asset->name, '.zip');
-            }))[0]->browser_download_url ?? '',
+            'package'     => $release->assets[0]->browser_download_url ?? '',
         ];
     }
 
