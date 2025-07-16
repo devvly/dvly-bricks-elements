@@ -70,6 +70,8 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
     if (is_wp_error($response)) return $transient;
 
     $release = json_decode(wp_remote_retrieve_body($response));
+    file_put_contents(__DIR__ . '/update-log.txt', print_r($release, true));
+    
     if (!isset($release->tag_name)) return $transient;
 
     $new_version = ltrim($release->tag_name, 'v');
