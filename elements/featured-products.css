@@ -53,11 +53,10 @@
   font-size: var(--font-body-l);
 }
 
-/* .brxe-dvly-featured-product-item-image img {
-    aspect-ratio: 1;
-    object-fit: contain;
-    background: var(--gray-100);
-} */
+.brxe-dvly-featured-product-item-image img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
 
 @media (min-width: 1200px) {
   .brxe-dvly-featured-products .splide__arrow--prev {
