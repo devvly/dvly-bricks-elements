@@ -6,43 +6,49 @@
  * Author: DVLY
  */
 
-if (!defined('ABSPATH')) exit;
+error_log('DVLY plugin loaded');
 
-add_action('init', function () {
-    $element_slugs = [
-        'hero',
-        'icon-features',
-        'featured-product-categories',
-        'featured-products',
-        'image-text-block',
-        'call-to-action',
-        'logo-grid'
-    ];
+if (!defined('ABSPATH'))
+    exit;
 
-    foreach ($element_slugs as $slug) {
+// Define element slugs globally so both init and enqueue hooks can use them
+$dvly_element_slugs = [
+    'hero',
+    'icon-features',
+    'featured-product-categories',
+    'featured-products',
+    'image-text-block',
+    'call-to-action',
+    'logo-grid'
+];
+
+// Register Bricks elements
+add_action('init', function () use ($dvly_element_slugs) {
+    foreach ($dvly_element_slugs as $slug) {
         $file = plugin_dir_path(__FILE__) . "elements/{$slug}.php";
         if (file_exists($file)) {
             \Bricks\Elements::register_element($file);
         }
     }
-
-    add_action('wp_enqueue_scripts', function () use ($element_slugs) {
-        $base_dir = plugin_dir_path(__FILE__) . 'elements/';
-        $base_uri = plugin_dir_url(__FILE__) . 'elements/';
-
-        foreach ($element_slugs as $slug) {
-            $css_file = "{$base_dir}{$slug}.css";
-            if (file_exists($css_file)) {
-                wp_enqueue_style(
-                    'brxe-dvly-' . $slug,
-                    $base_uri . "{$slug}.css",
-                    [],
-                    filemtime($css_file)
-                );
-            }
-        }
-    });
 }, 11);
+
+// Enqueue element styles
+add_action('wp_enqueue_scripts', function () use ($dvly_element_slugs) {
+    $base_dir = plugin_dir_path(__FILE__) . 'elements/';
+    $base_uri = plugin_dir_url(__FILE__) . 'elements/';
+
+    foreach ($dvly_element_slugs as $slug) {
+        $css_file = "{$base_dir}{$slug}.css";
+        if (file_exists($css_file)) {
+            wp_enqueue_style(
+                'brxe-dvly-' . $slug,
+                $base_uri . "{$slug}.css",
+                [],
+                filemtime($css_file)
+            );
+        }
+    }
+});
 
 
 
@@ -51,8 +57,9 @@ add_action('init', function () {
  * Auto detect version updates
  */
 
- add_filter('site_transient_update_plugins', function ($transient) {
-    if (empty($transient->checked)) return $transient;
+add_filter('site_transient_update_plugins', function ($transient) {
+    if (empty($transient->checked))
+        return $transient;
 
     $plugin_slug = 'dvly-bricks-elements';
     $plugin_file = plugin_basename(__FILE__);
@@ -64,22 +71,24 @@ add_action('init', function () {
         'headers' => ['Accept' => 'application/vnd.github.v3+json']
     ]);
 
-    if (is_wp_error($response)) return $transient;
+    if (is_wp_error($response))
+        return $transient;
 
     $release = json_decode(wp_remote_retrieve_body($response));
 
-    if (!isset($release->tag_name)) return $transient;
+    if (!isset($release->tag_name))
+        return $transient;
 
     $new_version = ltrim($release->tag_name, 'v'); // e.g. v1.0.1 -> 1.0.1
     $current_version = get_plugin_data(__FILE__)['Version'];
 
     if (version_compare($new_version, $current_version, '>')) {
         $transient->response[$plugin_file] = (object) [
-            'slug'        => $plugin_slug,
-            'plugin'      => $plugin_file,
+            'slug' => $plugin_slug,
+            'plugin' => $plugin_file,
             'new_version' => $new_version,
-            'url'         => $release->html_url,
-            'package'     => $release->zipball_url,
+            'url' => $release->html_url,
+            'package' => $release->zipball_url,
         ];
     }
 
@@ -87,8 +96,10 @@ add_action('init', function () {
 });
 
 add_filter('plugins_api', function ($result, $action, $args) {
-    if ($action !== 'plugin_information') return $result;
-    if ($args->slug !== 'dvly-bricks-elements') return $result;
+    if ($action !== 'plugin_information')
+        return $result;
+    if ($args->slug !== 'dvly-bricks-elements')
+        return $result;
 
     $github_user = 'YOUR_GITHUB_USERNAME';
     $github_repo = 'dvly-bricks-elements';
@@ -97,18 +108,19 @@ add_filter('plugins_api', function ($result, $action, $args) {
         'headers' => ['Accept' => 'application/vnd.github.v3+json']
     ]);
 
-    if (is_wp_error($response)) return $result;
+    if (is_wp_error($response))
+        return $result;
 
     $release = json_decode(wp_remote_retrieve_body($response));
 
-    $result = (object)[
-        'name'          => 'DVLY Bricks Elements',
-        'slug'          => $args->slug,
-        'version'       => ltrim($release->tag_name, 'v'),
-        'author'        => '<a href="https://github.com/' . $github_user . '">Pablo Accorinti</a>',
-        'homepage'      => $release->html_url,
+    $result = (object) [
+        'name' => 'DVLY Bricks Elements',
+        'slug' => $args->slug,
+        'version' => ltrim($release->tag_name, 'v'),
+        'author' => '<a href="https://github.com/' . $github_user . '">Pablo Accorinti</a>',
+        'homepage' => $release->html_url,
         'download_link' => $release->zipball_url,
-        'sections'      => [
+        'sections' => [
             'description' => $release->body ?? 'Custom Bricks Builder elements for WooCommerce and more.',
         ],
     ];

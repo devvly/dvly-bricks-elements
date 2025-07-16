@@ -191,6 +191,7 @@ class Brxe_Dvly_Hero extends \Bricks\Element
 
   public function render()
   {
+    echo '<!-- DVLY LOGO GRID RENDERED -->';
     // Retrieve settings safely
     $settings = $this->settings ?? [];
 
