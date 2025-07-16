@@ -2,10 +2,10 @@
 /**
  * Plugin Name: DVLY Bricks Elements
  * Description: Custom Bricks Builder elements by DVLY for WooCommerce and more.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: DVLY
  * 
- * Update URI: https://github.com/pabloaccorinti/dvly-bricks-elements
+ * Update URI: https://github.com/devvly/dvly-bricks-elements
  */
 
 if (!defined('ABSPATH')) exit;
@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) exit;
  */
 $dvly_config = [
     'slug'         => 'dvly-bricks-elements',
-    'user'         => 'pabloaccorinti',
+    'user'         => 'devvly',
     'repo'         => 'dvly-bricks-elements',
     'plugin_file'  => plugin_basename(__FILE__),
     'element_slugs' => [
@@ -81,7 +81,7 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
             'plugin'      => $dvly_config['plugin_file'],
             'new_version' => $new_version,
             'url'         => $release->html_url,
-            'package'     => $release->zipball_url,
+            'package'     => $release->assets[0]->browser_download_url ?? '',
         ];
     }
 
@@ -111,7 +111,7 @@ add_filter('plugins_api', function ($result, $action, $args) use ($dvly_config) 
         'version'      => $version,
         'author'       => '<a href="https://github.com/' . $dvly_config['user'] . '">DVLY</a>',
         'homepage'     => $release->html_url,
-        'download_link'=> $release->zipball_url,
+        'download_link' => $release->assets[0]->browser_download_url ?? '',
         'sections'     => [
             'description' => $release->body ?? 'Custom Bricks Builder elements for WooCommerce and more.',
         ],
