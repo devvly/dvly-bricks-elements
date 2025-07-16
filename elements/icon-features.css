@@ -13,7 +13,7 @@
 }
 
 .brxe-dvly-icon-features-subtitle {
-  font-size: var(--font-h6);
+  font-size: var(--font-body-l);
 }
 
 .brxe-dvly-icon-features-list {
@@ -40,4 +40,5 @@
 
 .brxe-dvly-icon-features-title {
     margin: 0;
+    font-size: var(--font-h6);
 }

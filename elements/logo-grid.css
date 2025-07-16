@@ -15,17 +15,24 @@
 }
 
 .dvly-logo-grid-logos .dvly-logo-item {
-  width: 200px;
+  width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.brxe-dvly-logo-grid-container {
-    padding: var(--gap-2xl) var(--gap-s);
-    align-items: center;
+@media (min-width: 768px) {
+  .dvly-logo-grid-logos .dvly-logo-item {
+    width: 200px;
+  }
 }
 
-.dvly-logo-grid-title, .dvly-logo-grid-subtitle {
-    text-align: center;
+.brxe-dvly-logo-grid-container.brxe-container {
+  padding: var(--gap-2xl) var(--gap-s);
+  align-items: center;
+}
+
+.dvly-logo-grid-title,
+.dvly-logo-grid-subtitle {
+  text-align: center;
 }

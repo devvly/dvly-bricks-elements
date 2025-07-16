@@ -90,7 +90,7 @@ class Brxe_Dvly_Hero extends \Bricks\Element
       'spellcheck' => true, // Default: false
       // 'trigger' => 'enter', // Default: 'enter'
       'inlineEditing' => true,
-      'default' => 'Here goes your text ..',
+      'default' => 'Your hero title here',
     ];
 
     $this->controls['title_typography'] = [
@@ -191,7 +191,6 @@ class Brxe_Dvly_Hero extends \Bricks\Element
 
   public function render()
   {
-    echo '<!-- DVLY LOGO GRID RENDERED -->';
     // Retrieve settings safely
     $settings = $this->settings ?? [];
 

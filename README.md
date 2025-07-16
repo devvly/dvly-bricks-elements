@@ -1,3 +1,3 @@
 # DVLY Bricks Elements
 
-Custom Bricks Builder elements for WooCommerce and general use, built and maintained by DVLY.
+Custom Bricks Builder elements by DVLY, optimized for WooCommerce and reusable across a variety of layouts.
