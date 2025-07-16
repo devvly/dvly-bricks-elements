@@ -12,6 +12,10 @@
   padding: var(--gap-2xl) var(--gap-s);
 }
 
+.brxe-dvly-icon-features-title {
+    margin: 0;
+}
+
 .brxe-dvly-icon-features-subtitle {
   font-size: var(--font-body-l);
 }
@@ -33,12 +37,11 @@
   width: var(--full);
 }
 
-.brxe-dvly-icon-feature-text {
+.brxe-dvly-icon-features-list .brxe-dvly-icon-feature-text {
   margin-bottom: var(--gap-s);
 }
 
-
-.brxe-dvly-icon-features-title {
-    margin: 0;
-    font-size: var(--font-h6);
+.brxe-dvly-icon-features-list .brxe-dvly-icon-feature-title {
+  font-size: var(--font-h6);
 }
+
