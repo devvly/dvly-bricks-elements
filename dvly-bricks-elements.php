@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DVLY Bricks Elements
  * Description: Custom Bricks Builder elements by DVLY for WooCommerce and more.
- * Version: 1.0.1
+ * Version: 1.0.3
  * Author: DVLY
  * 
  * Update URI: https://github.com/devvly/dvly-bricks-elements
@@ -70,6 +70,8 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
     if (is_wp_error($response)) return $transient;
 
     $release = json_decode(wp_remote_retrieve_body($response));
+    file_put_contents(__DIR__ . '/update-log.txt', print_r($release, true));
+
     if (!isset($release->tag_name)) return $transient;
 
     $new_version = ltrim($release->tag_name, 'v');
@@ -81,7 +83,12 @@ add_filter('site_transient_update_plugins', function ($transient) use ($dvly_con
             'plugin'      => $dvly_config['plugin_file'],
             'new_version' => $new_version,
             'url'         => $release->html_url,
-            'package'     => $release->zipball_url,
+            'package' => array_values(array_filter($release->assets, function($asset) {
+                if (empty($release->assets) || !isset($release->assets[0]->browser_download_url)) {
+                    file_put_contents(__DIR__ . '/update-error.txt', 'No valid .zip asset found');
+                }
+                return str_ends_with($asset->name, '.zip');
+            }))[0]->browser_download_url ?? '',
         ];
     }
 
@@ -111,7 +118,7 @@ add_filter('plugins_api', function ($result, $action, $args) use ($dvly_config) 
         'version'      => $version,
         'author'       => '<a href="https://github.com/' . $dvly_config['user'] . '">DVLY</a>',
         'homepage'     => $release->html_url,
-        'download_link'=> $release->zipball_url,
+        'download_link' => $release->assets[0]->browser_download_url ?? '',
         'sections'     => [
             'description' => $release->body ?? 'Custom Bricks Builder elements for WooCommerce and more.',
         ],
