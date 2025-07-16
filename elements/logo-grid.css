@@ -36,3 +36,7 @@
 .dvly-logo-grid-subtitle {
   text-align: center;
 }
+
+.dvly-logo-grid-subtitle {
+  font-size: var(--font-body-l);
+}

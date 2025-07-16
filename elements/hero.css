@@ -1,7 +1,10 @@
 .brxe-dvly-hero {
-    padding: 120px 24px;
     justify-content: center;
     background: var(--gray-900);
+}
+
+.brxe-dvly-hero .brxe-dvly-hero-content {
+    padding: 120px 24px;
 }
 
 .brxe-dvly-hero-title, .brxe-dvly-hero-subtitle, .brxe-dvly-hero-above-title {
