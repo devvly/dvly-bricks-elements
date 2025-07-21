@@ -125,15 +125,16 @@ class Brxe_Dvly_Featured_Product_Categories extends \Bricks\Element
                     'property' => 'width',
                     'value' => '100%',
                     'selector' => '.brxe-dvly-featured-product-categories-container',
+                    'condition' => ['full_width' => true],
                 ],
                 [
                     'property' => 'max-width',
                     'value' => '100%',
                     'selector' => '.brxe-dvly-featured-product-categories-container',
-                ]
+                    'condition' => ['full_width' => true],
+                ],
             ],
         ];
-
 
         // Updated Gap Control (Using Bricks example)
 
