@@ -142,7 +142,7 @@ class Brxe_Dvly_Featured_Products extends \Bricks\Element
             'label' => esc_html__('Select Products', 'bricks'),
             'type' => 'select',
             'multiple' => true,
-            'options' => $this->get_products(),
+            'options' => $this->get_product_options(),
             'description' => esc_html__('Select up to 4 products to display.', 'bricks'),
         ];
 
@@ -275,17 +275,33 @@ class Brxe_Dvly_Featured_Products extends \Bricks\Element
         ];        
     }
 
-    private function get_products()
+    private function get_product_options($limit = 200)
     {
-        $products = wc_get_products([
+        $limit = (int) apply_filters('dvly_featured_products_options_limit', $limit);
+        if ($limit < 1) {
+            $limit = 1;
+        }
+
+        $transient_key = 'dvly_fp_options_' . $limit;
+        $cached = get_transient($transient_key);
+        if (is_array($cached)) {
+            return $cached;
+        }
+
+        $product_ids = wc_get_products([
             'status' => 'publish',
-            'limit' => -1,
+            'limit' => $limit,
+            'return' => 'ids',
+            'orderby' => 'date',
+            'order' => 'DESC',
         ]);
 
         $options = [];
-        foreach ($products as $product) {
-            $options[$product->get_id()] = $product->get_name();
+        foreach ($product_ids as $product_id) {
+            $options[$product_id] = get_the_title($product_id);
         }
+
+        set_transient($transient_key, $options, 10 * MINUTE_IN_SECONDS);
 
         return $options;
     }
@@ -296,7 +312,14 @@ class Brxe_Dvly_Featured_Products extends \Bricks\Element
         $above_title = esc_html($settings['above_title'] ?? '');
         $title = esc_html($settings['title'] ?? '');
         $description = esc_html($settings['description'] ?? '');
-        $selected_products = !empty($settings['selected_products']) ? $settings['selected_products'] : array_keys($this->get_products(5));
+        $default_ids = wc_get_products([
+            'status' => 'publish',
+            'limit' => 4,
+            'return' => 'ids',
+            'orderby' => 'date',
+            'order' => 'DESC',
+        ]);
+        $selected_products = !empty($settings['selected_products']) ? $settings['selected_products'] : $default_ids;
         $per_page = intval($settings['per_page'] ?? 4);
         $gap = intval($settings['gap'] ?? 24);
         $autoplay = !empty($settings['autoplay']) ? 'true' : 'false';
