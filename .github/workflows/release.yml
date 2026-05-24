@@ -12,15 +12,24 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Create plugin zip with correct folder name
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
         run: |
-          mkdir -p package
-          rsync -av --exclude=.git --exclude=.github --exclude=package ./ package/dvly-bricks-elements
-          cd package
-          zip -r dvly-bricks-elements.zip dvly-bricks-elements
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build release ZIP
+        run: npm run release
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          files: package/dvly-bricks-elements.zip
-          token: ${{ secrets.GH_PAT }}
+          files: release/dvly-bricks-elements.zip
+          token: ${{ secrets.GITHUB_TOKEN }}

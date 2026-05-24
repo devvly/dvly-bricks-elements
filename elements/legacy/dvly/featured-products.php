@@ -5,7 +5,7 @@ if (!defined('ABSPATH'))
 
 class Brxe_Dvly_Featured_Products extends \Bricks\Element
 {
-    public $category = 'dvly-elements';
+    public $category = 'dvly-legacy-elements';
     public $name = 'dvly-featured-products';
     public $icon = 'ti-star';
     public $scripts = ['brxeFeaturedProductsInit'];
@@ -275,11 +275,25 @@ class Brxe_Dvly_Featured_Products extends \Bricks\Element
         ];        
     }
 
-    private function get_products()
+    private function is_woocommerce_available(): bool
     {
+        return function_exists('wc_get_products') && function_exists('wc_get_product');
+    }
+
+    private function can_show_woocommerce_notice(): bool
+    {
+        return is_user_logged_in() && current_user_can('edit_posts');
+    }
+
+    private function get_products(int $limit = -1): array
+    {
+        if (!$this->is_woocommerce_available()) {
+            return [];
+        }
+
         $products = wc_get_products([
             'status' => 'publish',
-            'limit' => -1,
+            'limit' => $limit,
         ]);
 
         $options = [];
@@ -292,6 +306,13 @@ class Brxe_Dvly_Featured_Products extends \Bricks\Element
 
     public function render()
     {
+        if (!$this->is_woocommerce_available()) {
+            if ($this->can_show_woocommerce_notice()) {
+                echo '<div class="brxe-dvly-featured-products-notice">' . esc_html__('WooCommerce is required for this element.', 'bricks') . '</div>';
+            }
+            return;
+        }
+
         $settings = $this->settings ?? [];
         $above_title = esc_html($settings['above_title'] ?? '');
         $title = esc_html($settings['title'] ?? '');

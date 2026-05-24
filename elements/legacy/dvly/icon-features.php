@@ -6,7 +6,7 @@ if (!defined('ABSPATH'))
 
 class Brxe_Dvly_Icon_Features extends \Bricks\Element
 {
-    public $category = 'dvly-elements';
+    public $category = 'dvly-legacy-elements';
     public $name = 'dvly-icon-features';
     public $icon = 'ti-list';
 

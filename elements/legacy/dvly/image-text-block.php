@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) exit;
 
 class Brxe_Dvly_Image_Text_Block extends \Bricks\Element
 {
-    public $category = 'dvly-elements';
+    public $category = 'dvly-legacy-elements';
     public $name = 'dvly-brxe-dvly-image-text-block';
     public $icon = 'fa-columns';
 

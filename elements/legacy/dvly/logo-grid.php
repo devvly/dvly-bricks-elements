@@ -5,7 +5,7 @@ if (!defined('ABSPATH'))
 
 class Brxe_Dvly_Logo_Grid extends \Bricks\Element
 {
-    public $category = 'dvly-elements';
+    public $category = 'dvly-legacy-elements';
     public $name = 'dvly-logo-grid';
     public $icon = 'ti-gallery';
 

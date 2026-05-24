@@ -1,0 +1,8 @@
+{
+  "name": "dvly-bricks-elements",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build-assets.js",
+    "release": "npm run build && node tools/build-release.js"
+  }
+}

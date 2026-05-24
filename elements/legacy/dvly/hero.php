@@ -7,7 +7,7 @@ if (!defined('ABSPATH'))
 class Brxe_Dvly_Hero extends \Bricks\Element
 {
   // Element properties
-  public $category = 'dvly-elements';
+  public $category = 'dvly-legacy-elements';
   public $name = 'dvly-hero';
   public $icon = 'ti-layout-width-full';
 

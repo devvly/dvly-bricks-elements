@@ -1,0 +1,75 @@
+.brxe-twoa-hero {
+  display: flex;
+  width: 100%;
+}
+
+.brxe-twoa-hero__inner {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr);
+  margin-inline: auto;
+  max-width: 1200px;
+  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+  width: 100%;
+}
+
+.brxe-twoa-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 720px;
+}
+
+.brxe-twoa-hero__above-title,
+.brxe-twoa-hero__title,
+.brxe-twoa-hero__description {
+  width: 100%;
+}
+
+.brxe-twoa-hero__above-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.brxe-twoa-hero__title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 1;
+  margin: 0;
+}
+
+.brxe-twoa-hero__description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-top: 1.25rem;
+}
+
+.brxe-twoa-hero__description > :last-child {
+  margin-bottom: 0;
+}
+
+.brxe-twoa-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+  width: 100%;
+}
+
+.brxe-twoa-hero__media {
+  align-self: center;
+  width: 100%;
+}
+
+.brxe-twoa-hero__image {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .brxe-twoa-hero__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+  }
+}
