@@ -1,0 +1,99 @@
+@use '../base/tokens';
+@use '../base/mixins';
+@use '../base/breakpoints' as bp;
+
+.brxe-twoa-be-hero {
+  --twoa-be-hero-pad-y: var(--twoa-be-space-xl);
+  --twoa-be-hero-pad-x: var(--twoa-be-space-md);
+  --twoa-be-hero-content-max: 42rem;
+  --twoa-be-hero-stack-gap: var(--twoa-be-space-md);
+  --twoa-be-hero-buttons-gap: var(--twoa-be-space-sm);
+  --twoa-be-hero-bg: var(--twoa-be-color-background);
+  --twoa-be-hero-text: var(--twoa-be-color-text);
+
+  display: flex;
+  width: 100%;
+  background: var(--twoa-be-hero-bg);
+  color: var(--twoa-be-hero-text);
+
+  &__inner {
+    @include mixins.twoa-be-container(1200px);
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--twoa-be-hero-pad-y) var(--twoa-be-hero-pad-x);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--twoa-be-hero-stack-gap);
+    max-width: var(--twoa-be-hero-content-max);
+    min-width: 0;
+  }
+
+  &__eyebrow,
+  &__title,
+  &__description {
+    width: 100%;
+    margin: 0;
+  }
+
+  &__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1;
+  }
+
+  &__description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--twoa-be-hero-buttons-gap);
+    width: 100%;
+  }
+
+  &__media {
+    align-self: center;
+    width: 100%;
+    min-width: 0;
+  }
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &--media-first {
+    .brxe-twoa-be-hero__content {
+      order: 2;
+    }
+
+    .brxe-twoa-be-hero__media {
+      order: 1;
+    }
+  }
+}
+
+@media (min-width: bp.$twoa-be-breakpoint-md) {
+  .brxe-twoa-be-hero {
+    &__inner {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    }
+  }
+}

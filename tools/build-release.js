@@ -33,7 +33,7 @@ function getRuntimeEntries(rootDir) {
     'elements',
     'assets',
   ];
-  const optional = ['languages'];
+  const optional = ['languages', 'docs'];
   const entries = [];
 
   for (const entry of required) {

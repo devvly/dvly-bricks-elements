@@ -1,75 +1,95 @@
-.brxe-twoa-hero {
-  display: flex;
-  width: 100%;
+:root {
+  --twoa-be-color-primary: var(--primary, #111111);
+  --twoa-be-color-secondary: var(--secondary, #666666);
+  --twoa-be-color-text: var(--text, #111111);
+  --twoa-be-color-text-muted: var(--text-muted, #666666);
+  --twoa-be-color-surface: var(--surface, #ffffff);
+  --twoa-be-color-background: var(--background, #ffffff);
+  --twoa-be-space-xs: var(--space-xs, 0.5rem);
+  --twoa-be-space-sm: var(--space-sm, 0.75rem);
+  --twoa-be-space-md: var(--space-md, 1rem);
+  --twoa-be-space-lg: var(--space-lg, 2rem);
+  --twoa-be-space-xl: var(--space-xl, 4rem);
+  --twoa-be-radius-sm: var(--radius-sm, 0.25rem);
+  --twoa-be-radius-md: var(--radius-md, 0.5rem);
+  --twoa-be-radius-lg: var(--radius-lg, 1rem);
 }
 
-.brxe-twoa-hero__inner {
+.brxe-twoa-be-hero {
+  --twoa-be-hero-pad-y: var(--twoa-be-space-xl);
+  --twoa-be-hero-pad-x: var(--twoa-be-space-md);
+  --twoa-be-hero-content-max: 42rem;
+  --twoa-be-hero-stack-gap: var(--twoa-be-space-md);
+  --twoa-be-hero-buttons-gap: var(--twoa-be-space-sm);
+  --twoa-be-hero-bg: var(--twoa-be-color-background);
+  --twoa-be-hero-text: var(--twoa-be-color-text);
+  display: flex;
+  width: 100%;
+  background: var(--twoa-be-hero-bg);
+  color: var(--twoa-be-hero-text);
+}
+.brxe-twoa-be-hero__inner {
+  margin-inline: auto;
+  max-width: 1200px;
+  width: 100%;
   display: grid;
   gap: clamp(2rem, 5vw, 5rem);
   grid-template-columns: minmax(0, 1fr);
-  margin-inline: auto;
-  max-width: 1200px;
-  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
-  width: 100%;
+  padding: var(--twoa-be-hero-pad-y) var(--twoa-be-hero-pad-x);
 }
-
-.brxe-twoa-hero__content {
+.brxe-twoa-be-hero__content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 720px;
+  gap: var(--twoa-be-hero-stack-gap);
+  max-width: var(--twoa-be-hero-content-max);
+  min-width: 0;
 }
-
-.brxe-twoa-hero__above-title,
-.brxe-twoa-hero__title,
-.brxe-twoa-hero__description {
+.brxe-twoa-be-hero__eyebrow, .brxe-twoa-be-hero__title, .brxe-twoa-be-hero__description {
   width: 100%;
+  margin: 0;
 }
-
-.brxe-twoa-hero__above-title {
+.brxe-twoa-be-hero__eyebrow {
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  margin: 0 0 0.75rem;
   text-transform: uppercase;
 }
-
-.brxe-twoa-hero__title {
+.brxe-twoa-be-hero__title {
   font-size: clamp(2.5rem, 7vw, 5rem);
   line-height: 1;
-  margin: 0;
 }
-
-.brxe-twoa-hero__description {
+.brxe-twoa-be-hero__description {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  margin-top: 1.25rem;
 }
-
-.brxe-twoa-hero__description > :last-child {
+.brxe-twoa-be-hero__description > :last-child {
   margin-bottom: 0;
 }
-
-.brxe-twoa-hero__buttons {
+.brxe-twoa-be-hero__buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.75rem;
+  gap: var(--twoa-be-hero-buttons-gap);
   width: 100%;
 }
-
-.brxe-twoa-hero__media {
+.brxe-twoa-be-hero__media {
   align-self: center;
   width: 100%;
+  min-width: 0;
 }
-
-.brxe-twoa-hero__image {
+.brxe-twoa-be-hero__image {
   display: block;
-  height: auto;
   width: 100%;
+  height: auto;
+}
+.brxe-twoa-be-hero--media-first .brxe-twoa-be-hero__content {
+  order: 2;
+}
+.brxe-twoa-be-hero--media-first .brxe-twoa-be-hero__media {
+  order: 1;
 }
 
 @media (min-width: 768px) {
-  .brxe-twoa-hero__inner {
+  .brxe-twoa-be-hero__inner {
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
   }
 }

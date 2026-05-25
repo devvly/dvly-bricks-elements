@@ -1,0 +1,16 @@
+@mixin twoa-be-container($max: 1200px) {
+  margin-inline: auto;
+  max-width: $max;
+  width: 100%;
+}
+
+@mixin twoa-be-visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}

@@ -1,0 +1,18 @@
+:root {
+  --twoa-be-color-primary: var(--primary, #111111);
+  --twoa-be-color-secondary: var(--secondary, #666666);
+  --twoa-be-color-text: var(--text, #111111);
+  --twoa-be-color-text-muted: var(--text-muted, #666666);
+  --twoa-be-color-surface: var(--surface, #ffffff);
+  --twoa-be-color-background: var(--background, #ffffff);
+
+  --twoa-be-space-xs: var(--space-xs, 0.5rem);
+  --twoa-be-space-sm: var(--space-sm, 0.75rem);
+  --twoa-be-space-md: var(--space-md, 1rem);
+  --twoa-be-space-lg: var(--space-lg, 2rem);
+  --twoa-be-space-xl: var(--space-xl, 4rem);
+
+  --twoa-be-radius-sm: var(--radius-sm, 0.25rem);
+  --twoa-be-radius-md: var(--radius-md, 0.5rem);
+  --twoa-be-radius-lg: var(--radius-lg, 1rem);
+}

@@ -2,7 +2,12 @@
   "name": "dvly-bricks-elements",
   "private": true,
   "scripts": {
-    "build": "node tools/build-assets.js",
+    "build:css": "npx sass-embedded assets/scss/twoa/hero.scss assets/css/twoa/hero.css --style=expanded --no-source-map",
+    "build": "npm run build:css && node tools/build-assets.js",
     "release": "npm run build && node tools/build-release.js"
+  },
+  "devDependencies": {
+    "sass": "^1.94.2",
+    "sass-embedded": "^1.100.0"
   }
 }
