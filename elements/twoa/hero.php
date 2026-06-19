@@ -340,16 +340,6 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             ],
         ];
 
-        $this->controls['content_stack_gap'] = [
-            'tab' => 'content',
-            'group' => 'style',
-            'label' => esc_html__('Content Stack Gap', 'bricks'),
-            'type' => 'text',
-            'default' => 'var(--twoa-gap-m)',
-            'description' => esc_html__('Examples: 16, 16px, 1rem, var(--gap-m)', 'bricks'),
-            'rerender' => true,
-        ];
-
         $this->controls['buttons_gap'] = [
             'tab' => 'content',
             'group' => 'style',
@@ -408,7 +398,6 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         ]) . '>';
         echo '<div class="brxe-twoa-be-hero__content"' . $this->render_inline_style_attribute([
             'max-width' => $this->normalize_css_length_value($settings['content_max_width'] ?? null, '100%'),
-            'gap' => $this->normalize_css_length_value($settings['content_stack_gap'] ?? null, 'var(--twoa-gap-m)'),
             'justify-self' => $this->map_alignment_to_justify_self($content_alignment),
         ]) . '>';
 
