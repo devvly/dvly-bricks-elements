@@ -245,20 +245,9 @@ class Brxe_TwoA_Hero extends \Bricks\Element
                 '70vh' => '70vh',
                 '80vh' => '80vh',
                 '100vh' => '100vh',
-                'custom' => esc_html__('Custom', 'bricks'),
             ],
             'default' => '60vh',
             'rerender' => true,
-        ];
-
-        $this->controls['custom_min_height'] = [
-            'tab' => 'content',
-            'group' => 'layout',
-            'label' => esc_html__('Custom Min Height', 'bricks'),
-            'type' => 'text',
-            'description' => esc_html__('Examples: 500px, 60vh, 40rem, min(80vh, 900px)', 'bricks'),
-            'rerender' => true,
-            'condition' => ['min_height' => 'custom'],
         ];
 
         $this->controls['vertical_alignment'] = [
@@ -383,6 +372,14 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             ],
         ];
 
+        $this->controls['background_color'] = [
+            'tab' => 'content',
+            'group' => 'style',
+            'label' => esc_html__('Background Color', 'bricks'),
+            'type' => 'color',
+            'rerender' => true,
+        ];
+
         $this->controls['buttons_gap'] = [
             'tab' => 'content',
             'group' => 'style',
@@ -409,15 +406,13 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $content_alignment = $this->get_allowed_value($settings['content_alignment'] ?? 'left', ['left', 'center', 'right'], 'left');
         $vertical_alignment = $this->get_allowed_value($settings['vertical_alignment'] ?? 'center', ['top', 'center', 'bottom'], 'center');
         $min_height = $this->get_min_height_value($settings);
+        $background_color = $this->normalize_css_color_value($settings['background_color'] ?? null);
         $has_media = $this->has_media($settings['image'] ?? []);
         $has_inline_media = $has_media && $media_layout === 'inline';
         $has_background_media = $has_media && $media_layout === 'background';
 
         $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero');
         $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero--valign-' . $vertical_alignment);
-        if ($min_height !== '') {
-            $this->set_attribute('_root', 'style', '--twoa-hero-min-height: ' . $min_height . ';');
-        }
         $this->set_attribute('_root', 'class', $has_media ? 'brxe-twoa-be-hero--has-media' : 'brxe-twoa-be-hero--no-media');
         $this->set_attribute('_root', 'class', $media_layout === 'background' ? 'brxe-twoa-be-hero--media-background' : 'brxe-twoa-be-hero--media-inline');
         if ($this->is_checked($settings['full_width_content'] ?? false)) {
@@ -430,7 +425,10 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero--overlay-' . $background_overlay);
         }
 
-        echo '<section ' . $this->render_attributes('_root') . '>';
+        echo '<section ' . $this->render_attributes('_root') . $this->render_inline_style_attribute([
+            '--twoa-hero-min-height' => $min_height,
+            'background-color' => $background_color,
+        ]) . '>';
         if ($has_background_media) {
             $this->render_background_image($settings['image'] ?? [], $settings['image_size'] ?? 'large');
 
@@ -658,17 +656,48 @@ class Brxe_TwoA_Hero extends \Bricks\Element
 
     private function get_min_height_value(array $settings): string
     {
-        $min_height = $this->get_allowed_value($settings['min_height'] ?? '60vh', ['auto', '40vh', '50vh', '60vh', '70vh', '80vh', '100vh', 'custom'], '60vh');
+        $min_height = $this->get_allowed_value($settings['min_height'] ?? '60vh', ['auto', '40vh', '50vh', '60vh', '70vh', '80vh', '100vh'], '60vh');
 
         if ($min_height === 'auto') {
             return '';
         }
 
-        if ($min_height === 'custom') {
-            return $this->normalize_css_length_value($settings['custom_min_height'] ?? null, '60vh');
+        return $min_height;
+    }
+
+    private function normalize_css_color_value($value): string
+    {
+        if (is_array($value)) {
+            foreach (['rgb', 'hsl', 'hex', 'color', 'value'] as $key) {
+                if (!empty($value[$key]) && is_string($value[$key])) {
+                    $value = $value[$key];
+                    break;
+                }
+            }
         }
 
-        return $min_height;
+        if (!is_string($value)) {
+            return '';
+        }
+
+        $value = trim($value);
+        if ($value === '') {
+            return '';
+        }
+
+        if (preg_match('/^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value)) {
+            return $value;
+        }
+
+        if (preg_match('/^(?:rgb|rgba|hsl|hsla)\([0-9.,%\s\/+-]+\)$/i', $value)) {
+            return $value;
+        }
+
+        if (preg_match('/^var\(--[a-zA-Z0-9_-]+(?:,\s*[^;{}]+)?\)$/', $value)) {
+            return $value;
+        }
+
+        return '';
     }
 
     private function is_checked($value): bool

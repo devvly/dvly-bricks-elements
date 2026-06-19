@@ -150,6 +150,7 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Hero supports client-friendly min-height presets and simple vertical alignment modifiers.
 - Hero supports inline image media and background image media as separate media layout choices.
 - Hero background images render as decorative real image markup with empty alt text and optional light/dark overlays.
+- Hero supports a root Background Color control because it styles the section surface, not text typography.
 - Hero does not include standalone eyebrow/title/description color controls because typography controls already cover color.
 - Hero defines local variable bridge aliases on its root instead of outputting global design tokens.
 - Hero keeps root, inner, and content wrappers because they define the layout contract.
