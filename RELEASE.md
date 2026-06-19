@@ -12,10 +12,10 @@ Create a local release ZIP:
 npm run release
 ```
 
-The release command runs the lightweight asset validation step and creates:
+The release command runs the lightweight asset validation step and creates a versioned ZIP:
 
 ```text
-release/dvly-bricks-elements.zip
+release/dvly-bricks-elements-{version}.zip
 ```
 
 The ZIP keeps the existing plugin root folder for compatibility:

@@ -22,7 +22,7 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - CSS modifier classes use BEM-style modifiers. Example: `.brxe-twoa-be-hero--media-first`.
 - Asset handles use `brxe-twoa-be-{element}`. Example: `brxe-twoa-be-hero`.
 - Component CSS variables use `--twoa-be-{element}-*`.
-- Shared token CSS variables use `--twoa-be-*`.
+- Local variable bridge aliases use `--twoa-*` and consume existing Bricks/global variables first.
 
 ## Folder Conventions
 
@@ -42,7 +42,9 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Use select controls for finite choices instead of free text.
 - Keep advanced controls out of v1 unless they solve a real client need.
 - Typography and color controls may exist where content hierarchy matters, but do not add excessive visual controls by default.
+- Do not add standalone color controls when typography controls already include color.
 - Any control that affects markup, classes, layout, or attributes must be allowlisted during render.
+- Elements may offer a simple full-width content toggle when useful. The default should remain constrained by `--container-width` through a local TwoA alias.
 
 ## Default Content Conventions
 
@@ -88,10 +90,15 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Keep styles scoped to the element root class.
 - Use BEM-style classes for predictable selectors.
 - Use per-element SCSS files and compiled CSS files.
-- Use shared base tokens, mixins, and breakpoints where they already exist.
+- Use shared base mixins and breakpoints where they already exist.
 - Avoid global CSS leaks.
 - Avoid hardcoded styles that fight Bricks or theme global styles.
 - Prefer CSS variables for repeated component values.
+- TwoA elements should not introduce an independent design system.
+- TwoA elements should use local `--twoa-*` aliases that consume existing Bricks/global variables first and provide safe fallbacks.
+- Do not overwrite Bricks/global variables from the plugin.
+- Do not output plugin-owned global `:root` design tokens from element CSS.
+- Element CSS should use TwoA aliases after the bridge is defined, not raw Bricks/global variables directly throughout the component.
 - Do not edit compiled CSS directly except for emergency hotfixes; update SCSS and rebuild.
 - Padding and gap controls should use non-negative CSS length normalization.
 
@@ -109,6 +116,7 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Use one-column stacking on small screens for split layouts.
 - Apply side-by-side media/content layouts at a medium breakpoint or larger.
 - If an element supports media left/right, keep mobile stacking graceful and apply ordering at desktop/tablet widths when possible.
+- If an element supports background image media, render the selected image as a real `<img>` and position it behind the content instead of using CSS `background-image`.
 - Buttons should wrap safely.
 - Text max widths should prevent overly long lines.
 
@@ -117,7 +125,9 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Heading tags should follow page hierarchy and be configurable where appropriate.
 - Do not use heading tags for decorative labels by default.
 - Images should use attachment markup when possible.
+- Prefer real `<img>` markup for Hero background images instead of CSS `background-image` when the image is user-selected content.
 - Image alt overrides should be supported when the image conveys meaning.
+- Background images that are decorative should use empty alt text by default.
 - Decorative images may use empty alt text where appropriate.
 - Links and buttons should have visible text.
 - Avoid empty anchors and controls without accessible names.
@@ -134,6 +144,11 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Hero button style, button size, alignment, media position, and tags are strictly allowlisted.
 - Hero renders buttons only when at least one valid button exists.
 - Hero media is optional and renders only when a valid image exists.
+- Hero supports constrained content by default and an optional full-width content mode.
+- Hero supports inline image media and background image media as separate media layout choices.
+- Hero background images render as decorative real image markup with empty alt text and optional light/dark overlays.
+- Hero does not include standalone eyebrow/title/description color controls because typography controls already cover color.
+- Hero defines local variable bridge aliases on its root instead of outputting global design tokens.
 - Hero keeps root, inner, and content wrappers because they define the layout contract.
 
 ## What Not To Abstract Yet
@@ -162,6 +177,7 @@ Any helper extraction should be small, readable, and covered by manual Bricks ch
 - Enqueue only the element CSS from `enqueue_scripts()`.
 - Provide useful client-neutral defaults.
 - Keep controls grouped and client-safe.
+- Avoid duplicate controls, especially standalone color controls next to typography controls that already include color.
 - Allowlist all finite settings before output.
 - Escape all frontend output.
 - Avoid empty optional wrappers on the frontend.

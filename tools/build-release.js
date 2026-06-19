@@ -21,6 +21,18 @@ function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
 }
 
+function getPluginVersion(rootDir) {
+  const mainFilePath = path.join(rootDir, MAIN_FILE);
+  const contents = fs.readFileSync(mainFilePath, 'utf8');
+  const match = contents.match(/^[ \t*]*Version:\s*([0-9]+(?:\.[0-9]+){1,3})\s*$/m);
+
+  if (!match) {
+    fail(`Could not determine plugin version from ${MAIN_FILE}`);
+  }
+
+  return match[1];
+}
+
 function escapePowerShellSingleQuoted(value) {
   return value.replace(/'/g, "''");
 }
@@ -223,12 +235,14 @@ function validateZip(zipPath) {
 function run() {
   const rootDir = process.cwd();
   const releaseDir = path.join(rootDir, 'release');
-  const zipPath = path.join(releaseDir, `${PLUGIN_SLUG}.zip`);
+  const version = getPluginVersion(rootDir);
+  const zipPath = path.join(releaseDir, `${PLUGIN_SLUG}-${version}.zip`);
   const entries = getRuntimeEntries(rootDir);
 
   ensureDir(releaseDir);
 
   info(`Plugin slug: ${PLUGIN_SLUG}`);
+  info(`Plugin version: ${version}`);
   info(`Package root: ${PLUGIN_SLUG}/`);
   info(`Packaging entries: ${entries.join(', ')}`);
 
