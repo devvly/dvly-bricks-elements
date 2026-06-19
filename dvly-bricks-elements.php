@@ -2,7 +2,7 @@
 /**
  * Plugin Name: DVLY Bricks Elements
  * Description: Custom Bricks Builder elements by DVLY for WooCommerce and more.
- * Version: 1.0.25
+ * Version: 1.0.26
  * Author: DVLY
  * 
  * Update URI: https://github.com/devvly/dvly-bricks-elements
@@ -10,7 +10,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-define('TWOA_BRICKS_ELEMENTS_VERSION', '1.0.25');
+define('TWOA_BRICKS_ELEMENTS_VERSION', '1.0.26');
 define('TWOA_BRICKS_ELEMENTS_PATH', plugin_dir_path(__FILE__));
 define('TWOA_BRICKS_ELEMENTS_URL', plugin_dir_url(__FILE__));
 define('TWOA_BRICKS_ELEMENTS_BASENAME', plugin_basename(__FILE__));

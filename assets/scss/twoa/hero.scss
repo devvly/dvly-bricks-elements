@@ -4,13 +4,21 @@
 .brxe-twoa-be-hero {
   --twoa-font-h1: var(--font-h1, clamp(5.375rem, 6vw, 7.629rem));
   --twoa-font-body-l: var(--font-body-l, 2rem);
+  --twoa-gap-xs: var(--gap-xs, 1rem);
   --twoa-gap-s: var(--gap-s, 1.5rem);
   --twoa-gap-m: var(--gap-m, 3rem);
+  --twoa-gap-l: var(--gap-l, 4.5rem);
   --twoa-gap-xl: var(--gap-xl, 6rem);
   --twoa-container-width: var(--container-width, 1100px);
   --twoa-radius-img: var(--radius-img, 2.4rem);
   --twoa-black: var(--black, #000);
   --twoa-white: var(--white, #fff);
+  --twoa-be-space-xs: var(--twoa-gap-xs);
+  --twoa-be-space-sm: var(--twoa-gap-s);
+  --twoa-be-space-md: var(--twoa-gap-m);
+  --twoa-be-space-lg: var(--twoa-gap-l);
+  --twoa-be-space-xl: var(--twoa-gap-xl);
+  --twoa-be-container-width: var(--twoa-container-width);
   --twoa-hero-pad-y: var(--twoa-gap-xl);
   --twoa-hero-pad-x: var(--twoa-gap-m);
   --twoa-be-hero-content-max: 100%;

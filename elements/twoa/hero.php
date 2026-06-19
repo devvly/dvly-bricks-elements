@@ -262,6 +262,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
                 'media_first' => esc_html__('Media Left', 'bricks'),
             ],
             'default' => 'content_first',
+            'condition' => ['media_layout' => 'inline'],
         ];
 
         $this->controls['title_tag'] = [
