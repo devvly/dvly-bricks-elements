@@ -32,6 +32,7 @@
   overflow: hidden;
   position: relative;
   width: 100%;
+  min-height: var(--twoa-hero-min-height);
   background: var(--twoa-be-hero-bg);
   color: var(--twoa-be-hero-text);
 
@@ -41,6 +42,7 @@
     display: grid;
     gap: var(--twoa-be-hero-grid-gap);
     grid-template-columns: minmax(0, 1fr);
+    min-height: inherit;
     padding: var(--twoa-hero-pad-y) var(--twoa-hero-pad-x);
     position: relative;
     z-index: 1;
@@ -134,6 +136,24 @@
   &--full-width {
     .brxe-twoa-be-hero__inner {
       max-width: none;
+    }
+  }
+
+  &--valign-top {
+    .brxe-twoa-be-hero__inner {
+      align-items: start;
+    }
+  }
+
+  &--valign-center {
+    .brxe-twoa-be-hero__inner {
+      align-items: center;
+    }
+  }
+
+  &--valign-bottom {
+    .brxe-twoa-be-hero__inner {
+      align-items: end;
     }
   }
 

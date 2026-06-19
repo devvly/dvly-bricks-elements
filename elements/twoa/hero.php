@@ -232,6 +232,49 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'rerender' => true,
         ];
 
+        $this->controls['min_height'] = [
+            'tab' => 'content',
+            'group' => 'layout',
+            'label' => esc_html__('Min Height', 'bricks'),
+            'type' => 'select',
+            'options' => [
+                'auto' => esc_html__('Auto', 'bricks'),
+                '40vh' => '40vh',
+                '50vh' => '50vh',
+                '60vh' => '60vh',
+                '70vh' => '70vh',
+                '80vh' => '80vh',
+                '100vh' => '100vh',
+                'custom' => esc_html__('Custom', 'bricks'),
+            ],
+            'default' => '60vh',
+            'rerender' => true,
+        ];
+
+        $this->controls['custom_min_height'] = [
+            'tab' => 'content',
+            'group' => 'layout',
+            'label' => esc_html__('Custom Min Height', 'bricks'),
+            'type' => 'text',
+            'description' => esc_html__('Examples: 500px, 60vh, 40rem, min(80vh, 900px)', 'bricks'),
+            'rerender' => true,
+            'condition' => ['min_height' => 'custom'],
+        ];
+
+        $this->controls['vertical_alignment'] = [
+            'tab' => 'content',
+            'group' => 'layout',
+            'label' => esc_html__('Vertical Alignment', 'bricks'),
+            'type' => 'select',
+            'options' => [
+                'top' => esc_html__('Top', 'bricks'),
+                'center' => esc_html__('Center', 'bricks'),
+                'bottom' => esc_html__('Bottom', 'bricks'),
+            ],
+            'default' => 'center',
+            'rerender' => true,
+        ];
+
         $this->controls['section_padding_y'] = [
             'tab' => 'content',
             'group' => 'layout',
@@ -364,11 +407,17 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $media_layout = $this->get_allowed_value($settings['media_layout'] ?? 'inline', ['inline', 'background'], 'inline');
         $background_overlay = $this->get_allowed_value($settings['background_overlay'] ?? 'none', ['none', 'light', 'dark'], 'none');
         $content_alignment = $this->get_allowed_value($settings['content_alignment'] ?? 'left', ['left', 'center', 'right'], 'left');
+        $vertical_alignment = $this->get_allowed_value($settings['vertical_alignment'] ?? 'center', ['top', 'center', 'bottom'], 'center');
+        $min_height = $this->get_min_height_value($settings);
         $has_media = $this->has_media($settings['image'] ?? []);
         $has_inline_media = $has_media && $media_layout === 'inline';
         $has_background_media = $has_media && $media_layout === 'background';
 
         $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero');
+        $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero--valign-' . $vertical_alignment);
+        if ($min_height !== '') {
+            $this->set_attribute('_root', 'style', '--twoa-hero-min-height: ' . $min_height . ';');
+        }
         $this->set_attribute('_root', 'class', $has_media ? 'brxe-twoa-be-hero--has-media' : 'brxe-twoa-be-hero--no-media');
         $this->set_attribute('_root', 'class', $media_layout === 'background' ? 'brxe-twoa-be-hero--media-background' : 'brxe-twoa-be-hero--media-inline');
         if ($this->is_checked($settings['full_width_content'] ?? false)) {
@@ -605,6 +654,21 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $value = is_string($value) ? strtolower(trim($value)) : '';
 
         return in_array($value, $allowed, true) ? $value : $fallback;
+    }
+
+    private function get_min_height_value(array $settings): string
+    {
+        $min_height = $this->get_allowed_value($settings['min_height'] ?? '60vh', ['auto', '40vh', '50vh', '60vh', '70vh', '80vh', '100vh', 'custom'], '60vh');
+
+        if ($min_height === 'auto') {
+            return '';
+        }
+
+        if ($min_height === 'custom') {
+            return $this->normalize_css_length_value($settings['custom_min_height'] ?? null, '60vh');
+        }
+
+        return $min_height;
     }
 
     private function is_checked($value): bool

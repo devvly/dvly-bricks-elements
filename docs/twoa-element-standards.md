@@ -45,6 +45,8 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Do not add standalone color controls when typography controls already include color.
 - Any control that affects markup, classes, layout, or attributes must be allowlisted during render.
 - Elements may offer a simple full-width content toggle when useful. The default should remain constrained by `--container-width` through a local TwoA alias.
+- Hero elements may expose client-friendly height presets instead of requiring raw CSS values.
+- Prefer simple alignment controls over layout-specific flex/grid controls.
 
 ## Default Content Conventions
 
@@ -145,6 +147,7 @@ Legacy DVLY elements remain compatibility-only. Do not rename or refactor legacy
 - Hero renders buttons only when at least one valid button exists.
 - Hero media is optional and renders only when a valid image exists.
 - Hero supports constrained content by default and an optional full-width content mode.
+- Hero supports client-friendly min-height presets and simple vertical alignment modifiers.
 - Hero supports inline image media and background image media as separate media layout choices.
 - Hero background images render as decorative real image markup with empty alt text and optional light/dark overlays.
 - Hero does not include standalone eyebrow/title/description color controls because typography controls already cover color.
