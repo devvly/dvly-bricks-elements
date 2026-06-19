@@ -68,7 +68,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'group' => 'content',
             'label' => esc_html__('Eyebrow', 'bricks'),
             'type' => 'text',
-            'default' => esc_html__('TwoA Elements', 'bricks'),
+            'default' => esc_html__('Built For Growth', 'bricks'),
             'inlineEditing' => true,
         ];
 
@@ -77,7 +77,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'group' => 'content',
             'label' => esc_html__('Title', 'bricks'),
             'type' => 'text',
-            'default' => esc_html__('Build Better Bricks Sections', 'bricks'),
+            'default' => esc_html__('Create A Stronger First Impression', 'bricks'),
             'inlineEditing' => true,
         ];
 
@@ -86,7 +86,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'group' => 'content',
             'label' => esc_html__('Description', 'bricks'),
             'type' => 'editor',
-            'default' => esc_html__('A clean, responsive hero element built for the new TwoA architecture.', 'bricks'),
+            'default' => esc_html__('Introduce your business with a clear message, helpful context, and a focused call to action.', 'bricks'),
             'inlineEditing' => [
                 'selector' => '.brxe-twoa-be-hero__description',
                 'toolbar' => true,
@@ -117,7 +117,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $this->controls['image_alt_override'] = [
             'tab' => 'content',
             'group' => 'media',
-            'label' => esc_html__('Image Alt Override', 'bricks'),
+            'label' => esc_html__('Image Alt Text', 'bricks'),
             'type' => 'text',
         ];
 
@@ -177,14 +177,11 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'label' => esc_html__('Content Alignment', 'bricks'),
             'type' => 'text-align',
             'default' => 'left',
+            'rerender' => true,
             'css' => [
                 [
                     'property' => 'text-align',
                     'selector' => '{{SELECTOR}} .brxe-twoa-be-hero__content',
-                ],
-                [
-                    'property' => 'justify-content',
-                    'selector' => '{{SELECTOR}} .brxe-twoa-be-hero__buttons',
                 ],
             ],
         ];
@@ -193,49 +190,30 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'tab' => 'content',
             'group' => 'layout',
             'label' => esc_html__('Content Max Width', 'bricks'),
-            'type' => 'number',
-            'unit' => 'px',
-            'default' => 720,
-            'min' => 320,
-            'max' => 1200,
-            'css' => [
-                [
-                    'property' => '--twoa-be-hero-content-max',
-                    'selector' => '{{SELECTOR}}',
-                ],
-            ],
+            'type' => 'text',
+            'default' => '100%',
+            'description' => esc_html__('Examples: 100%, 500, 500px, 42rem, var(--gap-l)', 'bricks'),
+            'rerender' => true,
         ];
 
         $this->controls['section_padding_y'] = [
             'tab' => 'content',
             'group' => 'layout',
             'label' => esc_html__('Section Padding Y', 'bricks'),
-            'type' => 'number',
-            'unit' => 'px',
-            'default' => 96,
-            'min' => 0,
-            'css' => [
-                [
-                    'property' => '--twoa-be-hero-pad-y',
-                    'selector' => '{{SELECTOR}}',
-                ],
-            ],
+            'type' => 'text',
+            'default' => 'var(--twoa-be-space-xl)',
+            'description' => esc_html__('Examples: 120, 120px, 6rem, var(--gap-xl)', 'bricks'),
+            'rerender' => true,
         ];
 
         $this->controls['section_padding_x'] = [
             'tab' => 'content',
             'group' => 'layout',
             'label' => esc_html__('Section Padding X', 'bricks'),
-            'type' => 'number',
-            'unit' => 'px',
-            'default' => 24,
-            'min' => 0,
-            'css' => [
-                [
-                    'property' => '--twoa-be-hero-pad-x',
-                    'selector' => '{{SELECTOR}}',
-                ],
-            ],
+            'type' => 'text',
+            'default' => 'var(--twoa-be-space-md)',
+            'description' => esc_html__('Examples: 40, 40px, 2rem, var(--gap-l)', 'bricks'),
+            'rerender' => true,
         ];
 
         $this->controls['media_position'] = [
@@ -244,8 +222,8 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'label' => esc_html__('Media Position', 'bricks'),
             'type' => 'select',
             'options' => [
-                'content_first' => esc_html__('Content First', 'bricks'),
-                'media_first' => esc_html__('Media First', 'bricks'),
+                'content_first' => esc_html__('Media Right', 'bricks'),
+                'media_first' => esc_html__('Media Left', 'bricks'),
             ],
             'default' => 'content_first',
         ];
@@ -255,12 +233,35 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'group' => 'content',
             'label' => esc_html__('Title Tag', 'bricks'),
             'type' => 'select',
+            'rerender' => true,
             'options' => [
                 'h1' => 'H1',
                 'h2' => 'H2',
                 'h3' => 'H3',
+                'h4' => 'H4',
+                'h5' => 'H5',
+                'h6' => 'H6',
             ],
             'default' => 'h1',
+        ];
+
+        $this->controls['eyebrow_tag'] = [
+            'tab' => 'content',
+            'group' => 'content',
+            'label' => esc_html__('Eyebrow Tag', 'bricks'),
+            'type' => 'select',
+            'rerender' => true,
+            'options' => [
+                'p' => 'P',
+                'div' => 'DIV',
+                'span' => 'SPAN',
+                'h2' => 'H2',
+                'h3' => 'H3',
+                'h4' => 'H4',
+                'h5' => 'H5',
+                'h6' => 'H6',
+            ],
+            'default' => 'p',
         ];
 
         $this->controls['eyebrow_typography'] = [
@@ -345,32 +346,20 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             'tab' => 'content',
             'group' => 'style',
             'label' => esc_html__('Content Stack Gap', 'bricks'),
-            'type' => 'number',
-            'unit' => 'px',
-            'default' => 16,
-            'min' => 0,
-            'css' => [
-                [
-                    'property' => '--twoa-be-hero-stack-gap',
-                    'selector' => '{{SELECTOR}}',
-                ],
-            ],
+            'type' => 'text',
+            'default' => 'var(--twoa-be-space-md)',
+            'description' => esc_html__('Examples: 16, 16px, 1rem, var(--gap-m)', 'bricks'),
+            'rerender' => true,
         ];
 
         $this->controls['buttons_gap'] = [
             'tab' => 'content',
             'group' => 'style',
             'label' => esc_html__('Buttons Gap', 'bricks'),
-            'type' => 'number',
-            'unit' => 'px',
-            'default' => 12,
-            'min' => 0,
-            'css' => [
-                [
-                    'property' => '--twoa-be-hero-buttons-gap',
-                    'selector' => '{{SELECTOR}}',
-                ],
-            ],
+            'type' => 'text',
+            'default' => 'var(--twoa-be-space-sm)',
+            'description' => esc_html__('Examples: 12, 12px, 0.75rem, var(--gap-s)', 'bricks'),
+            'rerender' => true,
         ];
     }
 
@@ -381,24 +370,34 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $eyebrow = $settings['eyebrow'] ?? ($settings['above_title'] ?? '');
 
         // Only allow known-safe heading tags so markup stays valid and predictable.
-        $title_tag = strtolower((string) ($settings['title_tag'] ?? 'h1'));
-        if (!in_array($title_tag, ['h1', 'h2', 'h3'], true)) {
-            $title_tag = 'h1';
-        }
-        $media_position = $settings['media_position'] ?? 'content_first';
+        $title_tag = $this->get_allowed_value($settings['title_tag'] ?? 'h1', ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'], 'h1');
+        $eyebrow_tag = $this->get_allowed_value($settings['eyebrow_tag'] ?? 'p', ['p', 'div', 'span', 'h2', 'h3', 'h4', 'h5', 'h6'], 'p');
+        $media_position = $this->get_allowed_value($settings['media_position'] ?? 'content_first', ['content_first', 'media_first'], 'content_first');
+        $content_alignment = $this->get_allowed_value($settings['content_alignment'] ?? 'left', ['left', 'center', 'right'], 'left');
+        $has_media = $this->has_media($settings['image'] ?? []);
 
         $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero');
-        if ($media_position === 'media_first') {
+        $this->set_attribute('_root', 'class', $has_media ? 'brxe-twoa-be-hero--has-media' : 'brxe-twoa-be-hero--no-media');
+        if ($has_media && $media_position === 'media_first') {
             $this->set_attribute('_root', 'class', 'brxe-twoa-be-hero--media-first');
         }
 
         echo '<section ' . $this->render_attributes('_root') . '>';
-        echo '<div class="brxe-twoa-be-hero__inner">';
-        echo '<div class="brxe-twoa-be-hero__content">';
+        echo '<div class="brxe-twoa-be-hero__inner"' . $this->render_inline_style_attribute([
+            'padding-top' => $this->normalize_css_length_value($settings['section_padding_y'] ?? null, 'var(--twoa-be-space-xl)'),
+            'padding-bottom' => $this->normalize_css_length_value($settings['section_padding_y'] ?? null, 'var(--twoa-be-space-xl)'),
+            'padding-left' => $this->normalize_css_length_value($settings['section_padding_x'] ?? null, 'var(--twoa-be-space-md)'),
+            'padding-right' => $this->normalize_css_length_value($settings['section_padding_x'] ?? null, 'var(--twoa-be-space-md)'),
+        ]) . '>';
+        echo '<div class="brxe-twoa-be-hero__content"' . $this->render_inline_style_attribute([
+            'max-width' => $this->normalize_css_length_value($settings['content_max_width'] ?? null, '100%'),
+            'gap' => $this->normalize_css_length_value($settings['content_stack_gap'] ?? null, 'var(--twoa-be-space-md)'),
+            'justify-self' => $this->map_alignment_to_justify_self($content_alignment),
+        ]) . '>';
 
         if (!empty($eyebrow)) {
             // Plain text output is escaped to prevent HTML injection.
-            echo '<p class="brxe-twoa-be-hero__eyebrow">' . esc_html($eyebrow) . '</p>';
+            echo '<' . $eyebrow_tag . ' class="brxe-twoa-be-hero__eyebrow">' . esc_html($eyebrow) . '</' . $eyebrow_tag . '>';
         }
 
         if (!empty($settings['title'])) {
@@ -411,7 +410,11 @@ class Brxe_TwoA_Hero extends \Bricks\Element
             echo '<div class="brxe-twoa-be-hero__description">' . wp_kses_post($settings['description']) . '</div>';
         }
 
-        $this->render_buttons($settings['buttons'] ?? []);
+        $this->render_buttons(
+            $settings['buttons'] ?? [],
+            $this->normalize_css_length_value($settings['buttons_gap'] ?? null, 'var(--twoa-be-space-sm)'),
+            $content_alignment
+        );
 
         echo '</div>';
 
@@ -425,41 +428,52 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         echo '</section>';
     }
 
-    private function render_buttons($buttons): void
+    private function render_buttons($buttons, string $gap, string $alignment): void
     {
         if (empty($buttons) || !is_array($buttons)) {
             return;
         }
 
-        // Repeater-driven buttons with Bricks native link attributes per item.
-        echo '<div class="brxe-twoa-be-hero__buttons">';
+        $button_markup = '';
 
         foreach ($buttons as $index => $button) {
-            if (empty($button['text']) || empty($button['link']) || !is_array($button['link'])) {
-                continue;
-            }
-
-            $classes = ['brxe-button', 'bricks-button', 'brxe-twoa-be-hero__button'];
-
-            if (!empty($button['style'])) {
-                // Dynamic class parts are sanitized before composing class names.
-                $classes[] = 'bricks-button-' . sanitize_html_class($button['style']);
-            }
-
-            if (!empty($button['size'])) {
-                $classes[] = sanitize_html_class($button['size']);
-            }
-
-            $link_key = 'twoa_hero_button_' . $index;
-            $this->set_link_attributes($link_key, $button['link']);
-
-            echo '<a ' . $this->render_attributes($link_key) . ' class="' . esc_attr(implode(' ', $classes)) . '">';
-            // Button text is plain text and escaped.
-            echo esc_html($button['text']);
-            echo '</a>';
+            $button_markup .= $this->get_button_markup($button, $index);
         }
 
+        if ($button_markup === '') {
+            return;
+        }
+
+        // Repeater-driven buttons with Bricks native link attributes per item.
+        echo '<div class="brxe-twoa-be-hero__buttons"' . $this->render_inline_style_attribute([
+            'gap' => $gap,
+            'justify-content' => $this->map_alignment_to_flex_justify($alignment),
+        ]) . '>';
+
+        echo $button_markup;
         echo '</div>';
+    }
+
+    private function get_button_markup($button, int $index): string
+    {
+        if (!is_array($button) || empty($button['text']) || empty($button['link']) || !is_array($button['link'])) {
+            return '';
+        }
+
+        $style = $this->get_allowed_value($button['style'] ?? 'primary', ['primary', 'secondary', 'light', 'dark'], 'primary');
+        $size = $this->get_allowed_value($button['size'] ?? 'md', ['sm', 'md', 'lg', 'xl'], 'md');
+        $classes = ['brxe-button', 'bricks-button', 'brxe-twoa-be-hero__button', 'bricks-button-' . $style, $size];
+        $link_key = 'twoa_hero_button_' . $index;
+
+        $this->set_link_attributes($link_key, $button['link']);
+
+        ob_start();
+        echo '<a ' . $this->render_attributes($link_key) . ' class="' . esc_attr(implode(' ', $classes)) . '">';
+        // Button text is plain text and escaped.
+        echo esc_html($button['text']);
+        echo '</a>';
+
+        return (string) ob_get_clean();
     }
 
     private function render_image($image, string $image_size, string $alt_override): void
@@ -472,7 +486,7 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         $image_id = !empty($image['id']) ? absint($image['id']) : 0;
         $image_html = '';
         $size = in_array($image_size, ['thumbnail', 'medium', 'large', 'full'], true) ? $image_size : 'large';
-        $alt = trim($alt_override);
+        $alt = trim((string) $alt_override);
 
         if ($image_id) {
             $image_html = wp_get_attachment_image($image_id, $size, false, [
@@ -489,6 +503,111 @@ class Brxe_TwoA_Hero extends \Bricks\Element
         }
 
         echo '<div class="brxe-twoa-be-hero__media">' . $image_html . '</div>';
+    }
+
+    private function has_media($image): bool
+    {
+        if (empty($image) || !is_array($image)) {
+            return false;
+        }
+
+        if (!empty($image['id']) && absint($image['id']) > 0) {
+            return true;
+        }
+
+        return !empty($image['url']);
+    }
+
+    private function render_inline_style_attribute(array $styles): string
+    {
+        $parts = [];
+        foreach ($styles as $prop => $value) {
+            if (!is_string($value) || trim($value) === '') {
+                continue;
+            }
+            $parts[] = $prop . ': ' . $value;
+        }
+
+        if (empty($parts)) {
+            return '';
+        }
+
+        return ' style="' . esc_attr(implode('; ', $parts) . ';') . '"';
+    }
+
+    private function normalize_css_length_value($value, string $fallback): string
+    {
+        if (is_numeric($value)) {
+            if ((float) $value < 0) {
+                return $fallback;
+            }
+
+            return (string) $value . 'px';
+        }
+
+        if (!is_string($value)) {
+            return $fallback;
+        }
+
+        $value = trim($value);
+        if ($value === '') {
+            return $fallback;
+        }
+
+        if (preg_match('/(^|[\s(,])-\d/', $value)) {
+            return $fallback;
+        }
+
+        if (preg_match('/^(?:\d+|\d*\.\d+)$/', $value)) {
+            return $value . 'px';
+        }
+
+        if (preg_match('/^(var|calc|clamp|min|max)\(.+\)$/', $value)) {
+            return $value;
+        }
+
+        if (preg_match('/^(?:\d+|\d*\.\d+)(px|rem|em|%|vh|vw|vmin|vmax|ch|ex)$/', $value)) {
+            return $value;
+        }
+
+        return $fallback;
+    }
+
+    private function get_allowed_value($value, array $allowed, string $fallback): string
+    {
+        $value = is_string($value) ? strtolower(trim($value)) : '';
+
+        return in_array($value, $allowed, true) ? $value : $fallback;
+    }
+
+    private function map_alignment_to_justify_self($alignment): string
+    {
+        $alignment = is_string($alignment) ? strtolower(trim($alignment)) : 'left';
+
+        if ($alignment === 'center') {
+            return 'center';
+        }
+
+        if ($alignment === 'right') {
+            return 'end';
+        }
+
+        return 'start';
+    }
+
+    private function map_alignment_to_flex_justify($alignment): string
+    {
+        $alignment = is_string($alignment) ? strtolower(trim($alignment)) : 'left';
+
+        if ($alignment === 'center') {
+            return 'center';
+        }
+
+        if ($alignment === 'right') {
+            return 'flex-end';
+        }
+
+        return 'flex-start';
     }
 }
 
